@@ -1,0 +1,8 @@
+ToolBox.iml
+ToolBox.ipr
+ToolBox.iws
+.gradle/
+buildSrc/.gradle/
+buildSrc/build/
+buildSrc/buildSrc.iml
+.idea/
