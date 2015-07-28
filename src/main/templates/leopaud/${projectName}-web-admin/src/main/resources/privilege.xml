@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<privilege privilegeId="100" privilegeName="后台管理">
+		<!--<privilege privilegeId="101" privilegeName="主播管理">-->
+			<!--<url>../../anchor.html</url>-->
+		<!--</privilege>-->
+	</privilege>
+</root>

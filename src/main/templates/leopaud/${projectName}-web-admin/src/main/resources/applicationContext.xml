@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:leopard="http://leopard.yy.com/schema/leopard"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://leopard.yy.com/schema/leopard http://leopard.yy.com/schema/leopard-0.1.xsd
+	http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
+
+	<import resource="applicationContext-service.xml" />
+	<import resource="applicationContext-handler.xml" />
+	
+	<leopard:component-scan base-package="com.duowan.${projectName}.handler.impl" />
+	<leopard:component-scan base-package="com.duowan.${projectName}.web.controller" />
+
+	<leopard:timer-scan base-package="com.duowan.${projectName}.timer" />
+
+	<leopard:config adminType="mysql" performance="true" distributedSession="false" csrf="false"/>
+
+	<bean id="validationExceptionHandlerResolver" class="com.duowan.handler.ValidationExceptionHandlerResolver">
+		<property name="order" value="1"/>
+	</bean>
+	
+	<bean id="udbAppId" class="java.lang.String">
+		<constructor-arg value="\${appid}" />
+	</bean>
+
+	<bean id="udbAppKey" class="java.lang.String">
+		<constructor-arg value="\${appkey}" />
+	</bean>
+
+	<bean id="privilegeInitPath" class="java.lang.String">
+		<constructor-arg value="\${admincenter_product_local_file}"></constructor-arg>
+	</bean>
+
+	<bean id="adminCenterSdk" class="com.duowan.admin.center.sdk.AdminCenterSdk">
+		<!-- 产品标识 -->
+		<property name="productId" value="\${admincenter_product_id}" />
+		<!-- 产品密钥 -->
+		<property name="productKey" value="\${admincenter_product_key}" />
+		<!-- 请求权限管理中心获取权限数据的地址 -->
+		<property name="infoUrl" value="\${admincenter_product_query_url}" />
+		<!-- 权限树文件的本地文件系统路径 -->
+		<property name="privilegeInitPath" ref="privilegeInitPath" />
+	</bean>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping  path="/js/**" />
+			<mvc:exclude-mapping  path="/css/**" />
+			<mvc:exclude-mapping  path="/images/**" />
+			<mvc:exclude-mapping  path="/img/**" />
+			<mvc:exclude-mapping  path="*.woff" />
+			<mvc:exclude-mapping  path="*.ico" />
+			<mvc:exclude-mapping  path="*.swf" />
+			<mvc:exclude-mapping  path="*.png" />
+			<mvc:exclude-mapping  path="/file/upload.do" />
+			<mvc:exclude-mapping  path="*.do" />
+			<bean id="authInterceptor" class="com.duowan.game.common.interceptor.AuthInterceptor">
+				<property name="appId" ref="udbAppId" />
+				<property name="appKey" ref="udbAppKey" />
+				<property name="adminCenterSdk" ref="adminCenterSdk"/>
+				<property name="cacheTime" value="60"/>
+				<property name="sysName" value="${projectName}"/>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+</beans>

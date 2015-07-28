@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:leopard="http://leopard.yy.com/schema/leopard"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://leopard.yy.com/schema/leopard http://leopard.yy.com/schema/leopard-0.1.xsd">
+
+	<import resource="applicationContext-service.xml" />
+	<import resource="applicationContext-handler.xml" />
+	
+
+	<leopard:component-scan base-package="com.duowan.${projectName}.handler.impl" />
+	<leopard:component-scan base-package="com.duowan.${projectName}.web.controller" />
+
+	<leopard:timer-scan base-package="com.duowan.${projectName}.timer" />
+
+	<leopard:config adminType="mysql" performance="true" distributedSession="false"  csrf="false"/>
+	
+	
+	
+	<bean id="validationExceptionHandlerResolver" class="com.duowan.handler.ValidationExceptionHandlerResolver">
+		<property name="order" value="1"/>
+	</bean>
+	
+	
+</beans>

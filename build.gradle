@@ -19,6 +19,7 @@ repositories {
 dependencies {
     // We use the latest groovy 2.x version for building this library
     compile 'org.codehaus.groovy:groovy-all:2.4.3'
+    compile 'org.springframework:spring-core:3.2.2.RELEASE'
 
     // We use the awesome Spock testing and specification framework
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
@@ -28,12 +29,26 @@ dependencies {
     compile localGroovy()
 }
 
-
+/**
+ * 默认生成项目模板，Spring Boot项目
+ */
 task genProject(type: toolbox.task.GenProjectTask) {
     groupId = project.properties['groupId']
     artifactId = project.properties['artifactId']
     templateName = project.properties['templateName']
     outDir = project.properties['outDir']
     overwrite = "true".equals(project.properties['overwrite'])
-
 }
+
+/**
+ * 生成yy leopaud项目框架
+ */
+task leopaudProject(type: toolbox.task.GenProjectTask) {
+    groupId = project.properties['groupId']
+    artifactId = project.properties['artifactId']
+    templateName = 'leopaud'
+    outDir = project.properties['outDir']
+    overwrite = "true".equals(project.properties['overwrite'])
+}
+
+

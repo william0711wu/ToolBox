@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<link rel="stylesheet" href="../../css/min.css" />
+<link rel="stylesheet" href="../../css/page.css" />
+<style type="text/css"> 
+.align-center{ 
+	position:fixed;
+	left:50%;
+	top:50%;
+	margin-left:width/2;
+	margin-top:height/2;
+} 
+</style> 
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="../../js/libs/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/menu.js"></script>
+<script>
+	$(document).ready(function() {
+		$.ajax({
+			type : "post",
+			url : "/menu/query",
+			dataType : "json",
+			success : function(json) {
+				loadMenu(json.data)
+				bindMenuEvent();
+				$('#loadingDiv').hide();
+			}
+		});
+
+	});
+</script>
+<title>端游秀后台管理中心</title>
+</head>
+<body>
+	<!--侧边菜单-->
+	<div id="loadingDiv" class="align-center">数据加载中...</div>
+	
+	<div id="sidebar" style="display: none;">
+		<ul>
+			<li>
+			  <a href="javascript:void(0);"
+				onclick="window.parent.location.href='../../index.html'"> <img
+					src="../../img/icons/menu/inbox.png" alt="" />后台首页
+			  </a>
+			</li>
+			
+		</ul>
+	</div>
+</body>
+</html>
+

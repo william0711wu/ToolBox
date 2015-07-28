@@ -6,6 +6,7 @@ package toolbox.utils
 class Keys {
     final static String artifactId = "artifactId" //项目名称
     final static String projectName = "projectName" //项目名称 ProjectName
+    final static String projectNameInPackage = "projectNameInPackage" //项目名在包中的名称 即项目名的小写形式， projectname
     final static String groupId = "groupId" //项目group id 例如：com.test
     final static String projectPackage = "projectPackage" //项目package id 例如：com.test.projectname
     final static String overwrite = "overwrite" //是否覆盖文件

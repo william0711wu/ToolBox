@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:leopard="http://leopard.yy.com/schema/leopard"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://leopard.yy.com/schema/leopard http://leopard.yy.com/schema/leopard-0.1.xsd">
+
+	<leopard:monitor>
+		<leopard:notifier name="谭海潮" mobile="18666923069" email="tanhaichao@yy.com" />
+		<leopard:notifier name="卢轩华" mobile="18666923069" email="luxuanhua@yy.com" />
+		<leopard:alarm sms="false"/>
+<!-- 
+		<leopard:redis server="127.0.0.1:6311" maxMemory="3G" />
+		<leopard:redis server="127.0.0.1:6379" maxMemory="3G" />
+		<leopard:redis server="" maxMemory="200M" />
+ -->
+		<leopard:base threadCount="1024" />
+
+	</leopard:monitor>
+
+</beans>

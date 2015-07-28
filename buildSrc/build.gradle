@@ -1,0 +1,18 @@
+
+apply plugin: 'groovy'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenLocal()//本地仓库
+    jcenter()
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    compile 'org.springframework:spring-core:3.2.2.RELEASE'
+
+    compile gradleApi()
+    compile localGroovy()
+}
+
+

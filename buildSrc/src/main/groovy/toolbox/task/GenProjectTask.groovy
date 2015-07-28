@@ -2,14 +2,34 @@ package toolbox.task
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
+import org.springframework.util.AntPathMatcher
 import toolbox.utils.Keys
 import toolbox.utils.ProjectTemplateDslParser
 import toolbox.utils.TemplateEngine
+
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
 
 /**
  * 生成项目 gradle Task
  */
 class GenProjectTask extends DefaultTask {
+
+    private AntPathMatcher pathMatcher = new AntPathMatcher()
+    //不用模板处理，只需要复制的文件
+    private def ingnorePattern = [
+            '/**/log4j*.properties',
+            '/**/mail*.properties',
+            '/**/webapp/commons/**/*.*',
+            '/**/webapp/css/**/*.*',
+            '/**/webapp/images/**/*.*',
+            '/**/webapp/img/**/*.*',
+            '/**/webapp/js/**/*.*',
+            '/**/webapp/udbsdk/**/*.*',
+            '/**/webapp/WEB-INF/jsp/**/*.*',
+            '/**/webapp/index.html',
+    ]
 
     String groupId
     String artifactId
@@ -24,15 +44,16 @@ class GenProjectTask extends DefaultTask {
             return
         }
         println("开始生成项目[${artifactId}]...")
-        def templateName = "spring-boot"
+        templateName=templateName ?: "spring-boot"
+        outDir = outDir ?: './'
         def sourceSrc = "src/main/java" //源文件路径
         def templateSrc = "src/main/templates"
         def targetProjectDir = "${outDir}${artifactId}"//目标项目路径
         def templateDir = "${project.projectDir}/${templateSrc}/${templateName}"//模板路径
-        outDir = outDir ?: './'
 
         def binding = new Binding()
         binding[Keys.projectName] = artifactId
+        binding[Keys.projectNameInPackage] = artifactId.toLowerCase()
         binding[Keys.groupId] = groupId
         binding[Keys.overwrite] = overwrite
         binding[Keys.projectPackage] =groupId+"."+artifactId.toLowerCase()
@@ -46,32 +67,29 @@ class GenProjectTask extends DefaultTask {
 
         new File(templateDir).eachFileRecurse() {
             def targetSubDir = it.path.replace(templateDir, "")
-            def targetFilePath = targetProjectDir + targetSubDir //目标文件路径
-            def templateRelPath = it.path //相对模板路径
-
+            def targetFilePath = targetProjectDir + replaceVarInPath(binding.variables,targetSubDir) //目标文件路径
+            def templateFilePath = it.path //模板路径
+            logger.info("开始处理文件："+templateFilePath)
             if (it.name.equals("var_template") || it.parentFile.name.equals("var_template")){
-                println("jump var template and files...")
+                logger.info("跳过文件："+templateFilePath)
             }else {
                 if (it.isDirectory()) {
                     new File(targetFilePath).mkdirs()
                 }  else {
-                    println(templateRelPath)
-                    println(targetFilePath)
-                    TemplateEngine.render(templateRelPath, targetFilePath, binding, overwrite)
+                    if(matchIgnore(templateFilePath)){
+                        Files.copy(Paths.get(templateFilePath),Paths.get(targetFilePath), StandardCopyOption.REPLACE_EXISTING)
+                    }else {
+                        TemplateEngine.render(templateFilePath, targetFilePath, binding, overwrite)
+                    }
                 }
             }
+            logger.info("完成处理文件："+templateFilePath)
         }
 
-        //解释项目个性dsl
-        ProjectTemplateDslParser dslParser = new ProjectTemplateDslParser()
-        dslParser.binding = binding
+        parseDslFile(templateDir, binding)
 
-        binding.config = dslParser.&config
 
-        //
-        def dslFile = new File("${templateDir}/var_template/TemplateDsl.groovy")
-        def shell = new GroovyShell(binding);
-        shell.evaluate(dslFile)
+
     }
 
     def printHelp() {
@@ -85,6 +103,48 @@ class GenProjectTask extends DefaultTask {
         -PoutDir [可选]输出项目路径
         """
         println(helpStr)
+    }
+
+    /**
+     * 解释项目个性dsl
+     * @param templateDir
+     * @param binding
+     */
+    def void parseDslFile(templateDir, Binding binding) {
+        def dslFile = new File("${templateDir}/var_template/TemplateDsl.groovy")
+        if (dslFile.exists()) {
+            //解释项目个性dsl
+            ProjectTemplateDslParser dslParser = new ProjectTemplateDslParser()
+            dslParser.binding = binding
+
+            binding.config = dslParser.&config
+            def shell = new GroovyShell(binding);
+            shell.evaluate(dslFile)
+        }
+    }
+
+
+    /**
+     * 替换在目录路径中的变量
+     * @param binding
+     * @param path
+     */
+    def replaceVarInPath( binding, path){
+        path = path.replace("\${projectName}",binding[Keys.projectName])
+        path = path.replace("\${projectNameInPackage}",binding[Keys.projectNameInPackage])
+        return path
+    }
+
+    /**
+     * 是否满足忽略模板
+     * @param filePath
+     * @return
+     */
+    def matchIgnore(filePath){
+        for(String pattern : ingnorePattern){
+            if(pathMatcher.match(pattern,filePath)) return true
+        }
+        return false
     }
 
 }

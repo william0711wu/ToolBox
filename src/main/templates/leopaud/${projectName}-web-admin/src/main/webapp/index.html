@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>盒子众筹</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" type="text/css" href="css/content.css"/>
+<link rel="stylesheet" type="text/css" href="css/boxy.css"/>
+	<style type="text/css">
+		.file {
+			position: relative;
+			display: inline-block;
+			background: #D0EEFF;
+			border: 1px solid #99D3F5;
+			border-radius: 4px;
+			padding: 4px 12px;
+			overflow: hidden;
+			color: #1E88C7;
+			text-decoration: none;
+			text-indent: 0;
+			line-height: 20px;
+		}
+		.file input {
+			position: absolute;
+			font-size: 100px;
+			right: 0;
+			top: 0;
+			opacity: 0;
+		}
+		.file:hover {
+			background: #AADFFD;
+			border-color: #78C3F3;
+			color: #004974;
+			text-decoration: none;
+		}
+	</style>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="js/artTemplate.js"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="js/jquery.form.min.js"></script>
+	<script type="text/javascript" src="js/jquery.boxy.js"></script>
+	<script type="text/javascript" src="js/Jcode.js"></script>
+	<script type="text/javascript" src="js/showBox.js"></script>
+	<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+
+<script>
+$(document).ready(function(){
+	authUser();
+	loadUserMenu(null);
+	template.config("cache",false);//关闭模板引擎缓存
+	template.helper('dateFormat', function (date, format) {
+		var tdate = new Date()
+		tdate.setTime(date)
+		return tdate.format(format);
+	});
+});
+
+
+function authUser(){
+	$.ajax({
+		  type: "post",
+		  url: "/user/auth",
+		  dataType: "json",
+		  async: false,
+		  success: function(json){
+			  var flag = json.data.valid;
+			  var userName = json.data.userName;
+			  if(!flag){
+				  $.ajax({
+					  type: "post",
+					  url: "/udb/logout.do",
+					  async: false,
+					  success: function(){
+						  window.parent.location.reload();
+					 }
+				  }); 
+			  }else{
+				 $('#username').html(userName);
+			  }
+		 }
+	  }); 
+}
+
+function logout(){
+	 $.ajax({
+		  type: "post",
+		  url: "/user/logout",
+		  dataType: "json",
+		  success: function(json){
+			  window.parent.location.reload();
+		 }
+	  }); 
+}
+</script>
+
+</head>
+<body>
+<div id="body-wrapper">
+	<div id="sidebar">
+        <div id="sidebar-wrapper">
+          	<h1 id="sidebar-title"><a href="#">运营支撑平台</a></h1>
+          	<a href=""><img style="margin-top: 15px;" src="images/logo.png" alt="统一运营平台" /></a>
+          	<span id="logo_gameName"></span>
+          	<div id="profile-links">
+				您好, <a href="#" title="用户名" id="username"></a><br /><a href="#" title="退出系统" onclick="window.logout();">退出</a>
+			</div>
+          	<ul id="main-nav" />
+        </div>
+	</div>
+  	<div id="main-content">
+    	<!-- Start 信息提示 -->
+		<div id="tisbox"></div>
+		<!-- End 信息提示 -->
+		<div class="main">
+       	  <div class="content-box">
+            <div class="content-box-header"><h3 class="check">系统首页</h3></div>
+              <div class="content-box-content" id="content"></div>
+            </div>
+        </div>
+        <div id="footer"> <small>&#169; Copyright 2015 Your www.duowan.com | Powered by <a> cattle</a> | <a href="#">Top</a></small></div>
+	</div> 
+</div>
+</body>
+</html>
