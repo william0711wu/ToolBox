@@ -4,6 +4,5 @@ include 'shared'
 include 'api'
 include 'services:webservice'
 */
-include 'Utils', 'Tools'
 
 rootProject.name = 'ToolBox'

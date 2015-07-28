@@ -1,5 +1,0 @@
-dependencies {
-    compile project(':Utils')
-}
-
-task genProject(type:toolbox.task.GenProjectTask)
