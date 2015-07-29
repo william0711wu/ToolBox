@@ -1,4 +1,4 @@
-package com.duowan.funding.web.controller.system;
+package com.duowan.funding.${projectNameInPackage}.controller.system;
 
 import com.duowan.admin.center.sdk.UserPrivilegeHolder;
 import com.duowan.game.common.menu.SystemMenuUtil;

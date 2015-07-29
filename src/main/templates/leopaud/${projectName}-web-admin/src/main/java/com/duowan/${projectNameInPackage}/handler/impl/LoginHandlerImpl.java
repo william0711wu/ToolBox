@@ -1,4 +1,4 @@
-package com.duowan.funding.handler.impl;
+package com.duowan.${projectNameInPackage}.handler.impl;
 
 import java.util.ArrayList;
 import java.util.List;

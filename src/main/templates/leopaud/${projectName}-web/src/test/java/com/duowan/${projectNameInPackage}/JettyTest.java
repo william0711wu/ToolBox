@@ -7,7 +7,7 @@ import com.duowan.leopard.test.jetty.JettyServer;
 public class JettyTest {
 
 	public static void main(String[] args) throws Exception {
-		JettyServer.start(8082);
+		JettyServer.start(8081);
 	}
 
 }

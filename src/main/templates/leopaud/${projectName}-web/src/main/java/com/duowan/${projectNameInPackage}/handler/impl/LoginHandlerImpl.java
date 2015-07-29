@@ -1,4 +1,4 @@
-package com.duowan.funding.handler.impl;
+package com.duowan.${projectNameInPackage}.handler.impl;
 
 import com.duowan.leopard.web.userinfo.service.LoginHandler;
 import org.springframework.stereotype.Component;
