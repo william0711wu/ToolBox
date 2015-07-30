@@ -1,0 +1,11 @@
+package ${filePackage};
+
+import com.duowan.common.crud.BaseDaoMysqlImpl;
+import com.duowan.${projectNameInPackage}.model.${entityName};
+import com.duowan.${projectNameInPackage}.dao.${entityName}Dao;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class ${className} extends BaseDaoMysqlImpl<${entityName},Long> implements ${entityName}Dao{
+
+}

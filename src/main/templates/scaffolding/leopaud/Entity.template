@@ -1,0 +1,27 @@
+package ${filePackage};
+
+import java.util.Date;
+
+public class ${className} {
+
+    //字段常量
+    <% fieldInfos.each{ %><% //以下生成field%>
+    public static final String FD_${it.dbFieldName.toUpperCase()}="${it.fieldNameLc}";//${it.dbFieldComment}
+    <% } %>
+
+    <% fieldInfos.each{ %><% //以下生成field%>
+    //${it.dbFieldComment}
+    private ${it.fieldType}  ${it.fieldNameLc};
+    <% } %>
+
+    <% //以下生成get set方法 %>
+    <% fieldInfos.each{ %>
+    public ${it.fieldType} get${it.fieldNameUc}() {
+        return ${it.fieldNameLc};
+    }
+
+    public void set${it.fieldNameUc}(${it.fieldType} ${it.fieldNameLc}) {
+        this.${it.fieldNameLc} = ${it.fieldNameLc};
+    }
+    <% } %>
+}

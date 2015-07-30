@@ -1,0 +1,26 @@
+package ${filePackage};
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.duowan.common.crud.BaseDao;
+import com.duowan.common.crud.BaseServiceImpl;
+import com.duowan.${projectNameInPackage}.dao.${entityName}Dao;
+import com.duowan.${projectNameInPackage}.model.${entityName};
+import com.duowan.${projectNameInPackage}.service.${entityName}Service;
+
+@Service
+public class ${className} extends BaseServiceImpl<${entityName},Long> implements ${entityName}Service {
+    private static final Logger log = LoggerFactory.getLogger(${className}.class);
+    @Autowired
+    private ${entityName}Dao ${lcEntityName}Dao;
+
+    @Override
+    public BaseDao<${entityName},Long> getBeanDao() {
+        return ${lcEntityName}Dao;
+    }
+
+}

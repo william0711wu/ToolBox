@@ -1,0 +1,8 @@
+package ${filePackage};
+
+import com.duowan.common.crud.BaseService;
+import com.duowan.${projectNameInPackage}.model.${entityName};
+
+public interface ${className} extends BaseService<${entityName},Long>{
+
+}

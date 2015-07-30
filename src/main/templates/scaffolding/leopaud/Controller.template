@@ -1,0 +1,32 @@
+package ${filePackage};
+
+import com.duowan.leopard.web.mvc.JsonView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.duowan.${projectNameInPackage}.service.${entityName}Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@Controller
+@RequestMapping(value = "/${lcEntityName}")
+public class ${className} {
+
+    @Autowired
+    private ${entityName}Service ${lcEntityName}Service;
+    /**
+     * 列表页
+     *
+     * @param request
+     * @param resp
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/list")
+    @ResponseBody
+    public JsonView list(HttpServletRequest request, HttpServletResponse resp)  {
+        return new JsonView();
+    }
+}

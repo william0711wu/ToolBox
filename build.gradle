@@ -1,3 +1,13 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'mysql:mysql-connector-java:5.1.36'
+    }
+}
+
 apply plugin: 'idea'
 // Apply the groovy plugin to add support for Groovy
 apply plugin: 'groovy'
@@ -14,13 +24,17 @@ repositories {
 //        url "http://repo.mycompany.com/maven2"
 //    }
 }
-
+configurations {
+    driver
+}
 // In this section you declare the dependencies for your production and test code
 dependencies {
     // We use the latest groovy 2.x version for building this library
     compile 'org.codehaus.groovy:groovy-all:2.4.3'
     compile 'org.springframework:spring-core:3.2.2.RELEASE'
 
+    compile 'com.google.guava:guava:18.0'
+    driver 'mysql:mysql-connector-java:5.1.36'
     // We use the awesome Spock testing and specification framework
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
     testCompile 'junit:junit:4.12'
@@ -49,6 +63,49 @@ task leopaudProject(type: toolbox.task.GenProjectTask) {
     templateName = 'leopaud'
     outDir = project.properties['outDir']
     overwrite = "true".equals(project.properties['overwrite'])
+}
+
+URLClassLoader loader = GroovyObject.class.classLoader
+configurations.driver.each {File file ->
+    loader.addURL(file.toURL())
+}
+
+/**
+ * crud 框架生成
+ */
+task scaffolding(type: toolbox.task.ScaffoldingTask){
+    groupId = project.properties['groupId']
+    artifactId = project.properties['artifactId']
+    templateName = project.properties['templateName']?:'leopaud'
+    rootDir = project.properties['rootProjectDir']
+    overwrite = "true".equals(project.properties['overwrite'])
+    entityName=project.properties['entityName']
+
+    //数据库配置[可选]
+    jdbcurl=project.properties['jdbcurl']
+    dbusername=project.properties['dbusername'] //数据库
+    dbpasswd=project.properties['dbpasswd']//数据库密码
+    dbname=project.properties['dbname']
+    ingnoreTables=project.properties['ingnoreTables']//忽略处理的表名，逗号分隔
+}
+/**
+ * leopaud crud框架
+ */
+task scaffoldOfLeopaud(type: toolbox.task.ScaffoldingTask){
+
+    groupId = project.properties['groupId']
+    artifactId = project.properties['artifactId']
+    templateName = 'leopaud'
+    rootDir = project.properties['rootProjectDir']
+    overwrite = "true".equals(project.properties['overwrite'])
+    entityName=""
+
+    //数据库配置[可选]
+    jdbcurl="jdbc:mysql://183.136.136.98:3306/funding?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull"
+    dbusername="root" //数据库
+    dbpasswd="thriftdy@819"//数据库密码
+    dbname="gos"
+    ingnoreTables=""//忽略处理的表名，逗号分隔
 }
 
 

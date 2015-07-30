@@ -25,14 +25,14 @@ public class TemplateEngine {
         if(!destinationFile.exists()){ //目标文件不存储
             destinationFile.parentFile.mkdirs()
             destinationFile.write(template.toString())
+            println("生成:"+destinationFile.getAbsolutePath())
         }else if(overwrite){
             destinationFile.write(template.toString())
+            println("覆盖:"+destinationFile.getAbsolutePath())
         }else {
-            println("skip file:"+destinationFile.getAbsolutePath())
+            println("跳过:"+destinationFile.getAbsolutePath())
         }
     }
-
-
 
 
 }
