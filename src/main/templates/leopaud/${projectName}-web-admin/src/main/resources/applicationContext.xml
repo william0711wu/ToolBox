@@ -11,10 +11,10 @@
 	<import resource="applicationContext-service.xml" />
 	<import resource="applicationContext-handler.xml" />
 	
-	<leopard:component-scan base-package="com.duowan.${projectName}.handler.impl" />
-	<leopard:component-scan base-package="com.duowan.${projectName}.web.controller" />
+	<leopard:component-scan base-package="com.duowan.${projectNameInPackage}.handler.impl" />
+	<leopard:component-scan base-package="com.duowan.${projectNameInPackage}.web.controller" />
 
-	<leopard:timer-scan base-package="com.duowan.${projectName}.timer" />
+	<leopard:timer-scan base-package="com.duowan.${projectNameInPackage}.timer" />
 
 	<leopard:config adminType="mysql" performance="true" distributedSession="false" csrf="false"/>
 

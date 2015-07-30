@@ -105,7 +105,7 @@ task scaffoldOfLeopaud(type: toolbox.task.ScaffoldingTask){
     dbusername="root" //数据库
     dbpasswd="thriftdy@819"//数据库密码
     dbname="gos"
-    ingnoreTables=""//忽略处理的表名，逗号分隔
+    ingnoreTables="permission,leopard_performance,admin"//忽略处理的表名，逗号分隔
 }
 
 
