@@ -98,7 +98,7 @@ task scaffoldOfLeopaud(type: toolbox.task.ScaffoldingTask){
     templateName = 'leopaud'
     rootDir = project.properties['rootProjectDir']
     overwrite = "true".equals(project.properties['overwrite'])
-    entityName=""
+    entityName=project.properties['entityName']
 
     //数据库配置[可选]
     jdbcurl="jdbc:mysql://183.136.136.98:3306/funding?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull"
@@ -106,6 +106,14 @@ task scaffoldOfLeopaud(type: toolbox.task.ScaffoldingTask){
     dbpasswd="thriftdy@819"//数据库密码
     dbname="gos"
     ingnoreTables="permission,leopard_performance,admin"//忽略处理的表名，逗号分隔
+}
+
+task help(){
+    println """
+        生成项目：gradle leopaudProject  -PartifactId=test -PgroupId=com.duowan -PoutDir=/Users/wuwenyi/Downloads/
+
+        生成代码：gradle scaffoldOfLeopaud  -PartifactId=test -PgroupId=com.duowan -PentityName=Example -Poverwrite=true -ProotProjectDir=/Users/wuwenyi/Downloads/test
+    """
 }
 
 
