@@ -12,9 +12,15 @@ import java.sql.Types
 class FieldInfo {
     def dbFieldName;//数据库字段名
     def dbFieldComment;//数据库字段注释
+    def fieldShowName;//字段名称，使用数据库字段的注释，截断到第一个空白
     def sqlType;//字段数据类型(对应java.sql.Types中的常量)
 
-    /**
+    def getFieldShowName() {
+        if(!dbFieldComment) return dbFieldName;//无注释，直接使用字段名称
+        return  dbFieldComment.split("\\s")[0]
+    }
+
+/**
      * 根据数据库字段的命名生成 bean 字段名称，大写驼峰格式
      * @return
      */
