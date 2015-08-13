@@ -45,25 +45,23 @@
 		<property name="privilegeInitPath" ref="privilegeInitPath" />
 	</bean>
 
+	<!--
+		自定义后台拦截器
+	-->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping  path="/js/**" />
-			<mvc:exclude-mapping  path="/css/**" />
-			<mvc:exclude-mapping  path="/images/**" />
-			<mvc:exclude-mapping  path="/img/**" />
-			<mvc:exclude-mapping  path="*.woff" />
-			<mvc:exclude-mapping  path="*.ico" />
-			<mvc:exclude-mapping  path="*.swf" />
-			<mvc:exclude-mapping  path="*.png" />
-			<mvc:exclude-mapping  path="/file/upload.do" />
+			<mvc:exclude-mapping  path="/assets/**" />
+			<mvc:exclude-mapping  path="/udbsdk/**" />
+			<mvc:exclude-mapping  path="*.html" />
 			<mvc:exclude-mapping  path="*.do" />
-			<bean id="authInterceptor" class="com.duowan.game.common.interceptor.AuthInterceptor">
+			<bean id="authInterceptor" class="com.duowan.common.interceptor.AuthInterceptor">
 				<property name="appId" ref="udbAppId" />
 				<property name="appKey" ref="udbAppKey" />
 				<property name="adminCenterSdk" ref="adminCenterSdk"/>
-				<property name="cacheTime" value="60"/>
-				<property name="sysName" value="${projectName}"/>
+				<property name="sysName" value="funding"/> <!--系统名称，在后台权限管理中心申请-->
+				<property name="cacheTime" value="10"/> <!--缓存时间 option-->
+				<property name="ipRestrict" value="false"/> <!--ip白名单限制 option-->
 			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

@@ -1,6 +1,0 @@
-/*
-.sdk_div {position:absolute;display:none; top:50%; left:50%; margin-left:-262px; margin-top:-148px;z-index:999;}
-*/
-.sdk_div {position:absolute; display:none; left:0px; top:0px; z-index:999;}
-.sdk_udbfrm {width:524px;*width:526px;_width:526px; height:298px;*height:300px;_height:312px;}
-.sdk_zeroHW	{width:0px;height:0px;}

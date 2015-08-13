@@ -1,7 +1,8 @@
 package com.duowan.handler;
 
 import com.duowan.exception.BizException;
-import com.duowan.common.ErrCode;
+import com.duowan.commonValidationException
+ValidationExceptionHandlerResolver.ErrCode;
 import com.duowan.leopard.web.mvc.JsonView;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
