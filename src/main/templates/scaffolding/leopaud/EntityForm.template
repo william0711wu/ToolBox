@@ -1,0 +1,10 @@
+package ${filePackage};
+
+import com.duowan.common.crud.BasePageForm;
+
+/**
+ * 查询条件表单
+ */
+public class ${className}  extends BasePageForm {
+
+}

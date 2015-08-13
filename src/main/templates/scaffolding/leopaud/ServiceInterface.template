@@ -2,7 +2,8 @@ package ${filePackage};
 
 import com.duowan.common.crud.BaseService;
 import com.duowan.${projectNameInPackage}.model.${entityName};
+import com.duowan.${projectNameInPackage}.form.${entityName}Form;
 
 public interface ${className} extends BaseService<${entityName},Long>{
-
+    DataPage<${entityName}> list(${entityName}Form ${lcEntityName}Form);
 }

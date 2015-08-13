@@ -6,6 +6,7 @@
             'newUrl': '',
             'editUrl': '',
             'delUrl': '',
+            'showUrl': '',
         };
         var settings = $.extend(defaults, options);
         //你自己的插件代码
@@ -80,6 +81,17 @@
                 var $modal = this.modal;
                 setTimeout(function () {
                     $modal.load(settings.editUrl, 'id='+id, function () {
+                        $modal.modal();
+                    });
+                }, 100);
+            },
+            show:function(id){
+                //查看页面
+                // create the backdrop and wait for next modal to be triggered
+                $('body').modalmanager('loading');
+                var $modal = this.modal;
+                setTimeout(function () {
+                    $modal.load(settings.showUrl, 'id='+id, function () {
                         $modal.modal();
                     });
                 }, 100);

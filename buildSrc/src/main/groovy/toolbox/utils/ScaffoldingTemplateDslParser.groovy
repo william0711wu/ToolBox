@@ -19,7 +19,7 @@ class ScaffoldingTemplateDslParser {
     /**
      * 处理代码源文件模板。处理参数如下：
      * <pre>
-     * file : 模板文件
+     * template : 模板文件
      * package : 目标包路径，如果为空，使用默认的项目路径 projectPackage
      * </pre>
      * @param map
@@ -37,6 +37,26 @@ class ScaffoldingTemplateDslParser {
         binding['filePackage'] = filePackage
         binding[Keys.className] = map[Keys.className]
         binding[Keys.lcEntityName] =CaseFormat.UPPER_CAMEL.converterTo(CaseFormat.LOWER_UNDERSCORE).convert(binding[Keys.entityName].toString())
+
+        TemplateEngine.render(templateFile,targetFile,binding,binding[Keys.overwrite])
+    }
+
+    /**
+     * 处理页面模板。
+     * * <pre>
+     * template : 模板文件
+     * fileName : 目标文件名称
+     * pagePath : 目标文件路径
+     * </pre>
+     * @param map
+     */
+    def rednerPage(map){
+        def templateFile = "${binding[Keys.templateDir]}/${map.template}"
+        binding[Keys.className] = map[Keys.className]
+        binding[Keys.lcEntityName] =CaseFormat.UPPER_CAMEL.converterTo(CaseFormat.LOWER_UNDERSCORE).convert(binding[Keys.entityName].toString())
+        def targetProjectDir = map.projectName ? "${binding[Keys.rootDir]}/${map.projectName}" : "${binding[Keys.rootDir]}"
+
+        def targetFile = "${targetProjectDir}/src/main/webapp/${map.pagePath ?: ''}/${binding[Keys.lcEntityName]}/${map.fileName}";
 
         TemplateEngine.render(templateFile,targetFile,binding,binding[Keys.overwrite])
     }

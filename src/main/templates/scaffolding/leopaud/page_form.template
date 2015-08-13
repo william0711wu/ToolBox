@@ -1,0 +1,108 @@
+<${''}%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<${''}%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<${''}%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<c:set var="readonly" value="\${pagetype=='show'?'disabled':''}" />
+<div class="form-body">
+<input name="id" type="hidden" value="\${example.id}">
+
+<div class="form-group">
+<label class="control-label col-md-3">名称 <span class="required">
+* </span>
+        </label>
+<div class="col-md-7">
+<div class="input-icon right">
+<i class="fa"></i>
+                <input type="text" class="form-control" name="name" value="\${example.name}" \${readonly} />
+</div>
+        </div>
+</div>
+
+    <div class="form-group">
+        <label class="control-label col-md-3">cdate <span class="required">
+            * </span>
+</label>
+        <div class="col-md-7">
+            <div class="input-icon right">
+                <i class="fa"></i>
+<input type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" name="cdate" value="\${example.cdate}"  \${readonly}/>
+</div>
+        </div>
+</div>
+
+
+    <div class="form-group">
+        <label class="control-label col-md-3">状态 <span class="required">
+            * </span>
+</label>
+        <div class="col-md-7">
+            <div class="input-icon right">
+                <i class="fa"></i>
+<input type="text" class="form-control" name="status"  value="\${example.status}" \${readonly}/>
+</div>
+        </div>
+</div>
+
+    <div class="form-group">
+        <label class="control-label col-md-3">url <span class="required">
+            * </span>
+</label>
+        <div class="col-md-7">
+            <div class="input-icon right">
+                <i class="fa"></i>
+<input type="text" class="form-control" name="url"  value="\${example.url}" \${readonly}/>
+</div>
+        </div>
+</div>
+
+</div>
+<div class="form-actions">
+<div class="row">
+<div class="col-md-offset-8 col-md-4">
+<button type="button" class="btn grey" data-dismiss="modal" aria-hidden="true">关闭</button>
+            <c:if test="\${pagetype!='show'}" >
+            <button type="submit" class="btn green">提交</button>
+</c:if>
+
+        </div>
+</div>
+</div>
+<script type="application/javascript">
+        \$(document).ready(function(){
+
+            \$('.date-picker').datepicker({
+                rtl: Metronic.isRTL(),
+                orientation: "left",
+                autoclose: true
+            });
+
+            //数据校验 define in scaffolding.js
+            scaffolding.validate({
+                name: {
+                    minlength: 3,
+                    maxlength: 100,
+                    required: true
+                },
+
+
+            });
+        });
+</script>
+<${''}%--
+支持的校验方法:
+ field[字段名称]: {
+      required: true, //必填
+minlength: 3,//填写最小长度
+maxlength: 100,//填大最小长度
+rangelength: [2, 6],//给定长度范围
+min: 1,//最小值
+max: 10,//最大值
+range: [1,10],//值有效范围
+email:true,//满足email格式
+url:true,//http://xxx.com 的url格式
+dateISO:true,//ISO date standard
+number:true,//有效数据，包括小数
+digits:true,//只有数字串
+equalTo: "#anthor field id",//与其它字段相等
+remote: "check-email.php",//ajax远程校验，ajax只返回true or false
+}
+--%>

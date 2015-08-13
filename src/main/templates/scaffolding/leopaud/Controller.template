@@ -1,23 +1,44 @@
 package ${filePackage};
 
+import com.duowan.handler.ValidationException;
 import com.duowan.leopard.web.mvc.JsonView;
+import com.duowan.${projectNameInPackage}.form.${entityName}Form;
+import com.duowan.${projectNameInPackage}.model.${entityName};
+import com.duowan.${projectNameInPackage}.service.${entityName}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.duowan.${projectNameInPackage}.service.${entityName}Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.util.Date;
+
 @Controller
 @RequestMapping(value = "/${lcEntityName}")
 public class ${className} {
 
     @Autowired
     private ${entityName}Service ${lcEntityName}Service;
+
     /**
-     * 列表页
+     * 入口页面，返回将进行sitemesh装饰
+     *
+     * @param request
+     * @param resp
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/index")
+    public ModelAndView index(HttpServletRequest request, HttpServletResponse resp)  {
+        ModelAndView modelAndView = new ModelAndView("/${lcEntityName}/index");
+        return modelAndView;
+    }
+
+    /**
+     * 列表页,处理查询过滤条件
      *
      * @param request
      * @param resp
@@ -25,8 +46,99 @@ public class ${className} {
      * @throws Exception
      */
     @RequestMapping(value = "/list")
-    @ResponseBody
-    public JsonView list(HttpServletRequest request, HttpServletResponse resp)  {
-        return new JsonView();
+    public ModelAndView list(${entityName}Form ${lcEntityName}Form,HttpServletRequest request, HttpServletResponse resp)  {
+        ModelAndView modelAndView = new ModelAndView("/${lcEntityName}/list");
+        modelAndView.addObject("dataPage",${lcEntityName}Service.list(${lcEntityName}Form));
+        return  modelAndView;
+    }
+
+
+    /**
+     * 新增页面
+     *
+     * @param request
+     * @param resp
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/new")
+    public ModelAndView add(HttpServletRequest request, HttpServletResponse resp)  {
+        ModelAndView modelAndView = new ModelAndView("/${lcEntityName}/create");
+        return modelAndView;
+    }
+
+    /**
+     * 添加新实例
+     *
+     * @param request
+     * @param resp
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/create")
+    public JsonView create(@Valid ${entityName} ${lcEntityName}, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse resp)  {
+        ValidationException.checkBindingResult(bindingResult);
+        ${lcEntityName}Service.add(${lcEntityName});
+        return new JsonView("");
+    }
+
+    /**
+     * 修改页面
+     *
+     * @param request
+     * @param resp
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/edit")
+    public ModelAndView edit(long id,HttpServletRequest request, HttpServletResponse resp)  {
+        ModelAndView modelAndView = new ModelAndView("/${lcEntityName}/edit");
+        modelAndView.addObject("${lcEntityName}",${lcEntityName}Service.get(id));
+        return modelAndView;
+    }
+
+    /**
+     * 更新实例
+     *
+     * @param request
+     * @param resp
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/update")
+    public JsonView update(@Valid ${entityName} ${lcEntityName}, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse resp)  {
+        ValidationException.checkBindingResult(bindingResult);
+        ${lcEntityName}Service.update(${lcEntityName});
+        return new JsonView("");
+    }
+
+    /**
+     * 查看页面
+     *
+     * @param request
+     * @param resp
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/show")
+    public ModelAndView show(long id,HttpServletRequest request, HttpServletResponse resp)  {
+        ModelAndView modelAndView = new ModelAndView("${lcEntityName}/show");
+        modelAndView.addObject("${lcEntityName}", ${lcEntityName}Service.get(id));
+        return modelAndView;
+    }
+
+
+    /**
+     * 删除实例
+     *
+     * @param request
+     * @param resp
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/del")
+    public JsonView del(long id,  HttpServletRequest request, HttpServletResponse resp)  {
+        ${lcEntityName}Service.delete(id,"",new Date());
+        return new JsonView("");
     }
 }

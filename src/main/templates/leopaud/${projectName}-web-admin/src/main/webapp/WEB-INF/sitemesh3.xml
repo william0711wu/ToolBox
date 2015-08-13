@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+    <!--每个controller的入口页进布局装饰-->
+    <mapping path="/**/index" decorator="/layout/main.jsp"/>
+
+    <!--不处理静态文件-->
+    <mapping path="/assets/**" exclude="true"/>
+    <mapping path="/admin/**" exclude="true"/>
+    <mapping path="/*.html" exclude="true"/>
+</sitemesh>

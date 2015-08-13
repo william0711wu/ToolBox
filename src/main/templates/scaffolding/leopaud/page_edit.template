@@ -1,0 +1,27 @@
+<${''}%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="pagetype" value="edit" />
+<div class="row">
+<div class="col-md-12">
+<${''}%--页面主要内容--%>
+<!-- BEGIN VALIDATION STATES-->
+<div class="portlet box blue" style="margin-bottom: 0px;">
+<div class="portlet-title">
+<div class="caption">
+<i class="fa fa-gift"></i>修改
+        </div>
+<div class="tools">
+
+</div>
+      </div>
+<div class="portlet-body form">
+<!-- BEGIN FORM-->
+<form id="data_form"   class="form-horizontal" action="/example/update" method="post">
+<jsp:include page="form.jsp" />
+</form>
+        <!-- END FORM-->
+      </div>
+</div>
+    <!-- END VALIDATION STATES-->
+    <${''}%--页面主要内容 end --%>
+  </div>
+</div>
