@@ -1,6 +1,5 @@
 package ${filePackage};
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
@@ -11,9 +10,9 @@ import com.duowan.common.crud.BaseServiceImpl;
 import com.duowan.common.crud.DataPage;
 import com.duowan.common.crud.QueryCondition;
 import com.duowan.leopard.data.Page;
-import com.duowan.common.crud.BaseServiceImpl;
 import com.duowan.${projectNameInPackage}.dao.${entityName}Dao;
 import com.duowan.${projectNameInPackage}.model.${entityName};
+import com.duowan.${projectNameInPackage}.form.${entityName}Form;
 import com.duowan.${projectNameInPackage}.service.${entityName}Service;
 
 @Service
@@ -27,20 +26,13 @@ public class ${className} extends BaseServiceImpl<${entityName},Long> implements
         return ${lcEntityName}Dao;
     }
 
-    public  DataPage<${entityName}> list(${entityName}Form ${lcEntityName}Form)
-            {
-                QueryCondition condition = new QueryCondition();
-//        if(StringUtils.isNotBlank(exampleForm.getName())){
-//            condition.like(Example.FD_NAME,exampleForm.getName());
+    @Override
+    public DataPage<${entityName}> list(${entityName}Form ${lcEntityName}Form) {
+        QueryCondition condition = new QueryCondition();
+//        if(StringUtils.isNotBlank(${lcEntityName}Form.getName())){
+//            condition.like(Example.FD_NAME,${lcEntityName}Form.getName());
 //        }
-                Page<Example> beanPage = exampleDao.queryByPage(condition, exampleForm.getPageNo(), exampleForm.getPageSize());
-                DataPage dataPage = new DataPage();
-                dataPage.setPageNo(exampleForm.getPageNo());
-                dataPage.setPageSize(exampleForm.getPageSize());
-                dataPage.setTotalRecord(beanPage.getCount());
-                dataPage.setResults(beanPage.getData());
-
-                return dataPage;
-            }
+        return this.queryByPage(condition,${lcEntityName}Form.getPageNo(),${lcEntityName}Form.getPageSize());
+    }
 
 }

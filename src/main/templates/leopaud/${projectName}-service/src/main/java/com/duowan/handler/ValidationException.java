@@ -21,7 +21,7 @@ public class ValidationException extends RuntimeException {
     public String getMessage(){
         List<String> errList = Lists.newArrayList();
         for(FieldError fe : bindingResult.getFieldErrors()){
-            errList.add(fe.getDefaultMessage()+"\n");
+            errList.add(fe.getDefaultMessage());
         }
         return Json.toJson(errList);
     }

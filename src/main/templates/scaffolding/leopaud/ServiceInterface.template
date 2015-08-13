@@ -1,6 +1,7 @@
 package ${filePackage};
 
 import com.duowan.common.crud.BaseService;
+import com.duowan.common.crud.DataPage;
 import com.duowan.${projectNameInPackage}.model.${entityName};
 import com.duowan.${projectNameInPackage}.form.${entityName}Form;
 
