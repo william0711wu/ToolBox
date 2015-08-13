@@ -2,17 +2,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="layout" content="metronic">
-<title>报告管理</title>
+  <meta name="layout" content="metronic">
+  <title>报告管理</title>
 </head>
 <body>
 <${''}%--页面特有css-将插入到布局文件的样式头中--%>
 <content tag="pagerRefCss">
-<link rel="stylesheet" href="/assets/global/plugins/select2/select2.css">
-<link rel="stylesheet" href="/assets/global/plugins/bootstrap-datepicker/css/datepicker.css">
+  <link rel="stylesheet" href="/assets/global/plugins/select2/select2.css">
+  <link rel="stylesheet" href="/assets/global/plugins/bootstrap-datepicker/css/datepicker.css">
 
-<link rel="stylesheet" href="/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css">
-<link rel="stylesheet" href="/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css">
+  <link rel="stylesheet" href="/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css">
+  <link rel="stylesheet" href="/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css">
 </content>
 
 <div class="page-content-wrapper">
@@ -20,75 +20,75 @@
 
     <!-- BEGIN PAGE HEADER-->
     <jsp:include page="page_bar.jsp" />
-<!-- END PAGE HEADER-->
-<!-- BEGIN PAGE CONTENT-->
-<div class="row">
-<div class="col-md-12">
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+    <div class="row">
+      <div class="col-md-12">
 
-<div class="portlet box blue-madison" id="scaffolding">
-<div class="portlet-title">
-<div class="caption">
-<i class="fa fa-cogs"></i>报告管理
+        <div class="portlet box blue-madison" id="scaffolding">
+          <div class="portlet-title">
+            <div class="caption">
+              <i class="fa fa-cogs"></i>报告管理
             </div>
-<div class="actions">
-<a href="#" id="addNewBtn" onclick="scaffolding.add(this)" class="btn btn-default btn-sm"> <i class="fa fa-plus"></i> 新增</a>
-</div>
+            <div class="actions">
+              <a href="#" id="addNewBtn" onclick="scaffolding.add(this)" class="btn btn-default btn-sm"> <i class="fa fa-plus"></i> 新增</a>
+            </div>
           </div>
-<div class="portlet-body">
-<${''}%--查询区--%>
-<form action="" method="get" class="form-inline well" id="searchForm">
-<div class="form-group">
-<label class="sr-only" ></label>
+          <div class="portlet-body">
+              <${''}%--查询区--%>
+              <form action="" method="get" class="form-inline well" id="searchForm">
+              <div class="form-group">
+                <label class="sr-only" ></label>
                 <input type="text" name="name"  class="form-control"  placeholder="标题">
               </div>
-<button type="button" class="btn blue" onclick="scaffolding.search()">搜索</button>
+              <button type="button" class="btn blue" onclick="scaffolding.search()">搜索</button>
               </form>
-<${''}%--查询区end--%>
+              <${''}%--查询区end--%>
 
-<div id="tableResults">
+            <div id="tableResults">
 
-</div>
+            </div>
           </div>
-</div>
+        </div>
 
       </div>
-</div>
+    </div>
     <!-- END PAGE CONTENT-->
   </div>
 </div>
 <!-- ajax modal -->
 <div id="ajax-modal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1">
 </div>
-<${''}%--使用模板-保障本页面引用的js在模板引用的js之后--%>
 <content tag="pagerRefJs">
-<script src="/assets/global/plugins/jquery-validation/js/jquery.validate.js" type="text/javascript" ></script>
-<script src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript" ></script>
-<script src="/assets/global/plugins/jquery-validation/js/localization/messages_zh.min.js" type="text/javascript" ></script>
-<script src="/assets/global/plugins/select2/select2.min.js" type="text/javascript" ></script>
-<script src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript" ></script>
+  <script src="/assets/global/plugins/jquery-validation/js/jquery.validate.js" type="text/javascript" ></script>
+  <script src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript" ></script>
+  <script src="/assets/global/plugins/jquery-validation/js/localization/messages_zh.min.js" type="text/javascript" ></script>
+  <script src="/assets/global/plugins/select2/select2.min.js" type="text/javascript" ></script>
+  <script src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript" ></script>
+  <script src="/assets/global/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" type="text/javascript" ></script>
 
-<script src="/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
-<script src="/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
-<script src="/assets/global/plugins/jquery-twbsPagination/jquery.twbsPagination.min.js" type="text/javascript"></script>
-<script src="/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js" type="text/javascript"></script>
-<script src="/assets/js/scaffolding.js" type="text/javascript"></script>
+  <script src="/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+  <script src="/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 
+  <script src="/assets/global/plugins/jquery-twbsPagination/jquery.twbsPagination.min.js" type="text/javascript"></script>
+
+  <script src="/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js" type="text/javascript"></script>
+  <script src="/assets/js/scaffolding.js" type="text/javascript"></script>
 </content>
 
-<${''}%--使用模板-页面自定义js--%>
 <content tag="pagerCustomJs">
   <script type="application/javascript">
-   \$(document).ready(function () {
-    //define in scaffolding.js
-    scaffolding = \$("#scaffolding").scaffolding({queryUrl:"/example/list",
-        newUrl:"/example/new",
-        editUrl:"/example/edit",
-        delUrl:"/example/del",
-        showUrl:"/example/show"})
-    scaffolding.query()
+    \$(document).ready(function () {
+      //define in scaffolding.js
+      scaffolding = \$("#scaffolding").scaffolding({queryUrl:"/${lcEntityName}/list",
+            newUrl:"/${lcEntityName}/new",
+            editUrl:"/${lcEntityName}/edit",
+            delUrl:"/${lcEntityName}/del",
+            showUrl:"/${lcEntityName}/show"})
+      scaffolding.query()
 
-});
-</script>
+    });
+  </script>
 </content>
 </body>
 </html>

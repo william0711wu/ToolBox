@@ -13,7 +13,11 @@
         <div class="col-md-7">
             <div class="input-icon right">
                 <i class="fa"></i>
-                <input type="text" class="form-control" name="name" value="\${${lcEntityName}.${it.fieldNameLc}}" \${readonly} />
+                <% if(it.fieldNameLc !='Date') { %>
+                    <input type="text" class="form-control date-picker" name="name" value="\${${lcEntityName}.${it.fieldNameLc}}" \${readonly} />
+                <% } else { %>
+                    <input type="text" class="form-control" name="name" value="\${${lcEntityName}.${it.fieldNameLc}}" \${readonly} />
+                <% } %>
             </div>
         </div>
     </div>
@@ -37,6 +41,8 @@
 
             \$('.date-picker').datepicker({
                 rtl: Metronic.isRTL(),
+                language: 'zh-CN',
+                format: 'yyyy-mm-dd',
                 orientation: "left",
                 autoclose: true
             });
