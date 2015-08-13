@@ -16,7 +16,7 @@ public interface BaseService<BEAN, KEYTYPE>  extends IUpdate<BEAN, KEYTYPE> {
 	 * @param pageSize
 	 * @return
 	 */
-	Data<BEAN> queryByPage(QueryCondition condition, int pageNo, int pageSize);
+	DataPage<BEAN> queryByPage(QueryCondition condition, int pageNo, int pageSize);
 
 	/**
 	 * 根据条件查询相应记录

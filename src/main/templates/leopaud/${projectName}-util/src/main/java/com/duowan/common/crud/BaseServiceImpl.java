@@ -1,8 +1,6 @@
 package com.duowan.common.crud;
 
 
-import com.duowan.leopard.data.Page;
-
 import java.util.Date;
 import java.util.List;
 
@@ -33,20 +31,8 @@ public abstract class BaseServiceImpl<BEAN, KEYTYPE> implements BaseService<BEAN
 
 
 	@Override
-	public Data<BEAN> queryByPage(QueryCondition condition, int pageNo, int pageSize) {
-		Page<BEAN> beanPage = getBeanDao().queryByPage(condition,pageNo,pageSize);
-		com.duowan.common.crud.Page page = new com.duowan.common.crud.Page();
-		Integer count = beanPage.getCount();
-		page.setCurrPage(pageNo);
-		Integer totalPage = (int) Math.ceil((double) count / (double) pageSize);
-		page.setTotalPage(totalPage);
-		page.setTotalRecord(count);
-
-		Data<BEAN> data = new Data<>();
-		data.setResult(beanPage.getData());
-		data.setPage(page);
-
-		return data;
+	public DataPage<BEAN> queryByPage(QueryCondition condition, int pageNo, int pageSize) {
+		return getBeanDao().queryByPage(condition,pageNo,pageSize);
 	}
 
 	@Override

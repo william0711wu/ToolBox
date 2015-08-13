@@ -60,7 +60,7 @@ public class BaseDaoMysqlImpl<BEAN, KEYTYPE> implements BaseDao<BEAN, KEYTYPE> {
     }
 
     @Override
-    public Page<BEAN> queryByPage(QueryCondition condition, int pageNo, int pageSize) {
+    public DataPage<BEAN> queryByPage(QueryCondition condition, int pageNo, int pageSize) {
         StatementParameter param = new StatementParameter();
         StringBuffer sb = new StringBuffer("select * from " + getTableName() + " where 1 =1 ");
         parseCondition(condition, param, sb);
@@ -69,7 +69,15 @@ public class BaseDaoMysqlImpl<BEAN, KEYTYPE> implements BaseDao<BEAN, KEYTYPE> {
             log.debug("sql==>"+sb);
         }
         int start = (pageNo - 1) * pageSize;
-        return jdbc.queryForPage(sb.toString(), entityClass, param, start, pageSize);
+        Page<BEAN> beanPage = jdbc.queryForPage(sb.toString(), entityClass, param, start, pageSize);
+
+        DataPage dataPage = new DataPage();
+        dataPage.setPageNo(pageNo);
+        dataPage.setPageSize(pageSize);
+        dataPage.setTotalRecord(beanPage.getCount());
+        dataPage.setResults(beanPage.getData());
+
+        return dataPage;
     }
 
     @Override

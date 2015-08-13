@@ -1,7 +1,6 @@
 
 package com.duowan.common.crud;
 
-import com.duowan.leopard.data.Page;
 import com.duowan.leopard.data.api.IUpdate;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public interface BaseDao<BEAN, KEYTYPE> extends IUpdate<BEAN, KEYTYPE> {
 	 * @param pageSize
 	 * @return
 	 */
-	Page<BEAN> queryByPage(QueryCondition condition, int pageNo, int pageSize);
+	DataPage<BEAN> queryByPage(QueryCondition condition, int pageNo, int pageSize);
 
 	/**
 	 * 根据条件查询相应记录
