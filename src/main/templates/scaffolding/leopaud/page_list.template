@@ -2,7 +2,7 @@
 <table class="table table-striped table-bordered table-advance table-hover">
     <thead>
     <tr>
-    <% fieldInfos.each{ %><% //以下生成field%>
+    <% fieldInfos.each{ %>
         <th>${it.fieldShowName}</th>
     <% } %>
         <th>
@@ -13,7 +13,7 @@
     <tbody>
     <c:forEach var="item" items="\${dataPage.results}">
         <tr>
-        <% fieldInfos.each{ %><% //以下生成field%>
+        <% fieldInfos.each{ %>
             <th>
                     \${item.${it.fieldNameLc}}
             </th>
