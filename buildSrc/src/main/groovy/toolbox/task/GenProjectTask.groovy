@@ -27,6 +27,8 @@ class GenProjectTask extends DefaultTask {
             '/**/webapp/img/**/*.*',
             '/**/webapp/js/**/*.*',
             '/**/webapp/udbsdk/**/*.*',
+            '/**/webapp/assets/**/*.*',
+            '/**/webapp/layout/**/*.*',
             '/**/webapp/WEB-INF/jsp/**/*.*',
             '/**/webapp/index.html',
     ]

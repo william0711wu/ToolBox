@@ -1,8 +1,7 @@
 package com.duowan.handler;
 
+import com.duowan.common.ErrCode;
 import com.duowan.exception.BizException;
-import com.duowan.commonValidationException
-ValidationExceptionHandlerResolver.ErrCode;
 import com.duowan.leopard.web.mvc.JsonView;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +20,8 @@ public class ValidationExceptionHandlerResolver extends AbstractHandlerMethodExc
     protected ModelAndView doResolveHandlerMethodException(HttpServletRequest request, HttpServletResponse response, HandlerMethod handlerMethod, Exception ex) {
         //数据校验未通过
         if(ex instanceof ValidationException){
-            return new JsonView(ErrCode.PARAM,"",ex.getMessage());
+            ValidationException ve = (ValidationException) ex;
+            return new JsonView(ErrCode.PARAM, ve.getBindingResult().getAllErrors(),ve.getMessage());
         }else if(ex instanceof BizException){
             return new JsonView(ErrCode.BIZ,"",ex.getMessage());
         }
