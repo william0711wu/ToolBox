@@ -51,10 +51,11 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping  path="/assets/**" />
-			<mvc:exclude-mapping  path="/udbsdk/**" />
-			<mvc:exclude-mapping  path="*.html" />
-			<mvc:exclude-mapping  path="*.do" />
+			<mvc:exclude-mapping  path="/assets/**/*.*" />
+			<mvc:exclude-mapping  path="/*.html" />
+			<mvc:exclude-mapping  path="/admin/*.do" />
+			<mvc:exclude-mapping  path="/udb/*.do" />
+			<mvc:exclude-mapping  path="/favicon.ico" />
 			<bean id="authInterceptor" class="com.duowan.common.interceptor.AuthInterceptor">
 				<property name="appId" ref="udbAppId" />
 				<property name="appKey" ref="udbAppKey" />

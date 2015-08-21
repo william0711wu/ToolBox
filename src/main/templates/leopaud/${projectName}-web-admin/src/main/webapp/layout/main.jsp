@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    //如果未登录，重定向的首页
+    if(request.getAttribute("_username")==null) response.sendRedirect("/index.html");
+%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -28,7 +32,7 @@
     <link rel="stylesheet" href="/assets/admin/layout/css/themes/darkblue.css">
     <link rel="stylesheet" href="/assets/admin/layout/css/custom.css">
     <sitemesh:write property='head'/>
-    <link rel="shortcut icon" href="/assets/favicon.ico"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
 </head>
 <body class="page-md page-header-fixed page-quick-sidebar-over-content">
 <!-- BEGIN HEADER -->
