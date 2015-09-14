@@ -30,6 +30,9 @@ class ScaffoldingTemplateDslParser {
         def filePackage = map.package ?: binding[Keys.projectPackage]
         def filePackagePath = filePackage.replace(".","/")
 
+        if(map.sourceSrc){
+            binding[Keys.sourceSrc]=map.sourceSrc
+        }
 
         def targetProjectDir = map.projectName ? "${binding[Keys.rootDir]}/${map.projectName}" : "${binding[Keys.rootDir]}"
         def targetFile = "${targetProjectDir}/${binding[Keys.sourceSrc]}/${filePackagePath}/${map.className}.${map.fileType}"

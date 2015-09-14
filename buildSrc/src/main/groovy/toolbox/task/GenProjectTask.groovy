@@ -31,6 +31,7 @@ class GenProjectTask extends DefaultTask {
             '/**/webapp/layout/**/*.*',
             '/**/webapp/WEB-INF/jsp/**/*.*',
             '/**/webapp/index.html',
+            '/**/webapp/favicon.ico',
     ]
 
     String groupId
@@ -71,9 +72,9 @@ class GenProjectTask extends DefaultTask {
             def targetSubDir = it.path.replace(templateDir, "")
             def targetFilePath = targetProjectDir + replaceVarInPath(binding.variables,targetSubDir) //目标文件路径
             def templateFilePath = it.path //模板路径
-            logger.info("开始处理文件："+templateFilePath)
+            println("开始处理文件："+templateFilePath)
             if (it.name.equals("var_template") || it.parentFile.name.equals("var_template")){
-                logger.info("跳过文件："+templateFilePath)
+                println("跳过文件："+templateFilePath)
             }else {
                 if (it.isDirectory()) {
                     new File(targetFilePath).mkdirs()

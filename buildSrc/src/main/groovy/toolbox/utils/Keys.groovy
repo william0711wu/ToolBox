@@ -24,4 +24,5 @@ class Keys {
     final static String className = "className" //类名称
     final static String fieldInfos = "fieldInfos" //实体类字段信息
     final static String rootDir = "rootDir" //输出根项目路径
+    final static String fieldModels = "fieldModels" //实体类字段信息
 }

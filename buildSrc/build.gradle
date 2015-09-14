@@ -12,6 +12,7 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.3'
     compile 'org.springframework:spring-core:3.2.2.RELEASE'
     compile 'com.google.guava:guava:18.0'
+    compile 'com.github.javaparser:javaparser-core:2.1.0'
     runtime 'mysql:mysql-connector-java:5.1.36'
 
     compile gradleApi()

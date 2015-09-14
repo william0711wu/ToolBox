@@ -6,7 +6,7 @@ import groovy.transform.ToString
 import java.sql.Types
 
 /**
- *
+ * 数据库字段信息，主要用于通过数据库生成domain
  */
 @ToString(includeNames=true)
 class FieldInfo {

@@ -32,6 +32,7 @@ dependencies {
     // We use the latest groovy 2.x version for building this library
     compile 'org.codehaus.groovy:groovy-all:2.4.3'
     compile 'org.springframework:spring-core:3.2.2.RELEASE'
+    compile 'com.github.javaparser:javaparser-core:2.1.0'
 
     compile 'com.google.guava:guava:18.0'
     driver 'mysql:mysql-connector-java:5.1.36'
@@ -106,6 +107,21 @@ task scaffoldOfLeopaud(type: toolbox.task.ScaffoldingTask){
     dbpasswd="thriftdy@819"//数据库密码
     dbname="gos"
     ingnoreTables="permission,leopard_performance,admin"//忽略处理的表名，逗号分隔
+}
+
+/**
+ * leopaud crud框架
+ */
+task scaffoldFromDomain(type: toolbox.task.GenScaffoldingFromDomainTask){
+
+    groupId = project.properties['groupId']
+    artifactId = project.properties['artifactId']
+    templateName = 'grails'
+    rootDir = project.properties['rootProjectDir']
+    overwrite = "true".equals(project.properties['overwrite'])
+    entityName=project.properties['entityName']
+    entityDir=project.properties['entityDir'] //实体类所在路径
+    entityFileType=project.properties['entityFileType'] //实体类文件类型，暂时支持groovy 与 java
 }
 
 task help(){
