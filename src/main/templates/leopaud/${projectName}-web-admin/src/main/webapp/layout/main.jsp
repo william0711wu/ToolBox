@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>系统名称</title>
+    <title>[环境：<%=com.duowan.leopard.core.env.EnvUtil.getDuowanEnv()%>]游戏自建帐号系统</title>
     <%--<!-- BEGIN GLOBAL MANDATORY STYLES -->--%>
     <link rel="stylesheet" href="/assets/global/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css">
