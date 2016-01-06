@@ -56,6 +56,8 @@ class FieldInfo {
                 return "Date"
             case Types.VARCHAR :
                 return "String"
+            case Types.CHAR  :
+                return "String"
             case Types.LONGVARCHAR :
                 return "String"
             case Types.DOUBLE :
