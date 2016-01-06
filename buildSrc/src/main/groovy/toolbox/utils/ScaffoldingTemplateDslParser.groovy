@@ -39,7 +39,7 @@ class ScaffoldingTemplateDslParser {
 
         binding['filePackage'] = filePackage
         binding[Keys.className] = map[Keys.className]
-        binding[Keys.lcEntityName] =CaseFormat.UPPER_CAMEL.converterTo(CaseFormat.LOWER_UNDERSCORE).convert(binding[Keys.entityName].toString())
+        binding[Keys.lcEntityName] =CaseFormat.UPPER_CAMEL.converterTo(CaseFormat.LOWER_CAMEL).convert(binding[Keys.entityName].toString())
 
         TemplateEngine.render(templateFile,targetFile,binding,binding[Keys.overwrite])
     }
@@ -56,7 +56,7 @@ class ScaffoldingTemplateDslParser {
     def rednerPage(map){
         def templateFile = "${binding[Keys.templateDir]}/${map.template}"
         binding[Keys.className] = map[Keys.className]
-        binding[Keys.lcEntityName] =CaseFormat.UPPER_CAMEL.converterTo(CaseFormat.LOWER_UNDERSCORE).convert(binding[Keys.entityName].toString())
+        binding[Keys.lcEntityName] =CaseFormat.UPPER_CAMEL.converterTo(CaseFormat.LOWER_CAMEL).convert(binding[Keys.entityName].toString())
         def targetProjectDir = map.projectName ? "${binding[Keys.rootDir]}/${map.projectName}" : "${binding[Keys.rootDir]}"
 
         def targetFile = "${targetProjectDir}/src/main/webapp/${map.pagePath ?: ''}/${binding[Keys.lcEntityName]}/${map.fileName}";

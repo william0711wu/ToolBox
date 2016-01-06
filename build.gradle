@@ -102,10 +102,14 @@ task scaffoldOfLeopaud(type: toolbox.task.ScaffoldingTask){
     entityName=project.properties['entityName']
 
     //数据库配置[可选]
-    jdbcurl="jdbc:mysql://eeb452.mysql.yyclouds.com:6839/rise_db?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull"
-    dbusername="dd120624c248" //数据库
-    dbpasswd="a74be4dc41c04403"//数据库密码
-    dbname="rise_db"
+    jdbcurl=project.properties['jdbcurl']
+    dbusername=project.properties['dbusername']
+    dbpasswd=project.properties['dbpasswd']
+    dbname=project.properties['dbname']
+//    jdbcurl="jdbc:mysql://eeb452.mysql.yyclouds.com:6839/rise_db?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull"
+//    dbusername="dd120624c248" //数据库
+//    dbpasswd="a74be4dc41c04403"//数据库密码
+//    dbname="rise_db"
     ingnoreTables="permission,leopard_performance,admin"//忽略处理的表名，逗号分隔
 }
 
